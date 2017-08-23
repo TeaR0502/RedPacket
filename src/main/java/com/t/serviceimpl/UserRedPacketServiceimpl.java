@@ -1,5 +1,8 @@
 package com.t.serviceimpl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -26,11 +29,14 @@ public class UserRedPacketServiceimpl implements UserRedPacketService {
 	public int grapRedPacket(Long userId, Long redPacketId) {
 		System.out.println("userId:"+userId+"||||||"+"redPacketId:"+redPacketId);
 		//获取被抢的红包的信息
-		RedPacket redPacket = redPacketDao.getRedPacketForUpdate(redPacketId);
+		RedPacket redPacket = redPacketDao.getRedPacket(redPacketId);
 		//System.out.println(redPacket);
 		//如果还有则抢红包
 		if (redPacket.getStock() > 0){
-			redPacketDao.decreaseRedPacket(redPacketId);
+			//Map<String, Object> map = new HashMap<String, Object>();
+			//map.put("id", redPacketId);
+			//map.put("version", redPacket.getVersion());
+			redPacketDao.decreaseRedPacketForVersion(redPacketId,redPacket.getVersion());
 			UserRedPacket userRedPacket = new UserRedPacket();
 			userRedPacket.setRedPacketId(redPacketId);
 			userRedPacket.setUserId(userId);

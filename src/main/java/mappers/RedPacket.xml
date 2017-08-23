@@ -25,6 +25,15 @@
     	set stock = stock - 1
     	where id = #{id}
  	</update>
+ 	
+ 	<!-- 减扣抢红包库存(此方法加乐观锁) -->
+  	<update id="decreaseRedPacketForVersion" parameterType="map">
+   		update T_RED_PACKET
+    	set stock = stock - 1,
+    		version = version+1
+    	where id = #{id}
+    	and version = #{version}
+ 	</update>
 
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.t.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.t.entity.RedPacket;
 
 /**
@@ -20,6 +22,15 @@ public interface RedPacketDao {
 	 * @return
 	 */
 	RedPacket getRedPacket(Long id);
+	
+	/**
+	 * 减少抢红包的数量(乐观锁)
+	 * @param id
+	 * @return
+	 */
+	int decreaseRedPacketForVersion(@Param(value = "id") Long id,@Param(value = "version") Integer version);
+	
+	
 	
 	/**
 	 * 减少抢红包的数量
