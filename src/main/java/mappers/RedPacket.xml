@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.t.dao.RedPacketDao" >
 
+	<!-- 查询红包的具体信息(此方法加悲观锁) for update-->
+  	<select id="getRedPacketForUpdate" resultType="com.t.entity.RedPacket" parameterType="long" >
+   		select 
+    		id,user_id as userId,amount,send_date as sendDate,total,unit_amount as unitAmount,stock,version,note
+    	from T_RED_PACKET
+    	where id = #{id} 
+    	for update
+ 	</select>
+
 	<!-- 查询红包的具体信息 -->
   	<select id="getRedPacket" resultType="com.t.entity.RedPacket" parameterType="long" >
    		select 

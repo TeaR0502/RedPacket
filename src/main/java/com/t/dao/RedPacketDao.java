@@ -6,6 +6,14 @@ import com.t.entity.RedPacket;
  * @author 0502  T  2017年8月23日
  */
 public interface RedPacketDao {
+	
+	/**
+	 * 获取红包的信息(悲观锁)
+	 * @param id
+	 * @return
+	 */
+	RedPacket getRedPacketForUpdate(Long id);
+	
 	/**
 	 * 获取红包的信息
 	 * @param id

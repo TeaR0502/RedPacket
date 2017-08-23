@@ -26,8 +26,8 @@ public class UserRedPacketServiceimpl implements UserRedPacketService {
 	public int grapRedPacket(Long userId, Long redPacketId) {
 		System.out.println("userId:"+userId+"||||||"+"redPacketId:"+redPacketId);
 		//获取被抢的红包的信息
-		RedPacket redPacket = redPacketDao.getRedPacket(redPacketId);
-		System.out.println(redPacket);
+		RedPacket redPacket = redPacketDao.getRedPacketForUpdate(redPacketId);
+		//System.out.println(redPacket);
 		//如果还有则抢红包
 		if (redPacket.getStock() > 0){
 			redPacketDao.decreaseRedPacket(redPacketId);
